@@ -1,4 +1,3 @@
-# Импортируем нужные функции из модулей пакета
 from .module1 import write_numbers_to_file, read_numbers_from_file, compute_product
 from .module2 import invert_case_in_file
 
