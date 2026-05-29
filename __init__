@@ -1,1 +1,66 @@
+# Импортируем нужные функции из модулей пакета
+from .module1 import write_numbers_to_file, read_numbers_from_file, compute_product
+from .module2 import invert_case_in_file
 
+
+def run_task2():
+    print("\n--- Задача 2 ---")
+    filename = "numbers.txt"
+    n = int(input("Введите количество чисел N: "))
+    numbers = []
+    print(f"Введите {n} действительных чисел:")
+    for i in range(n):
+        num = float(input(f"Число {i + 1}: "))
+        numbers.append(num)
+
+    write_numbers_to_file(filename, numbers)
+    print(f"Числа записаны в файл '{filename}'")
+
+    nums = read_numbers_from_file(filename)
+    product = compute_product(nums)
+    print(f"Произведение компонентов файла: {product}\n")
+
+
+def run_task17():
+    print("\n--- Задача 17: инверсия регистра букв в файле ---")
+    input_file = "original.txt"
+    output_file = "inverted.txt"
+
+    import os
+    if not os.path.exists(input_file):
+        sample_text = (
+            "Привет, World!\n"
+            "Это Пример Текста С Русскими И Английскими Словами.\n"
+            "Hello, МИР! How ARE you? 12345\n"
+        )
+        with open(input_file, 'w', encoding='utf-8') as f:
+            f.write(sample_text)
+        print(f"Создан пример файла '{input_file}'")
+
+    invert_case_in_file(input_file, output_file)
+    print(f"Результат инверсии регистра записан в '{output_file}'")
+
+    print("\n--- Исходный файл ---")
+    with open(input_file, 'r', encoding='utf-8') as f:
+        print(f.read())
+    print("--- Новый файл (инвертированный регистр) ---")
+    with open(output_file, 'r', encoding='utf-8') as f:
+        print(f.read())
+    print()
+
+
+def main():
+    print("Выберите задачу:")
+    print("1. Задача 2 (произведение чисел из файла)")
+    print("2. Задача 17 (инверсия регистра)")
+    choice = input("Ваш выбор (1 или 2): ").strip()
+    if choice == '1':
+        run_task2()
+    elif choice == '2':
+        run_task17()
+    else:
+        print("Неверный выбор.")
+
+
+if __name__ == "__main__":
+    main()
